@@ -15,6 +15,10 @@ class SmokeTest(unittest.TestCase):
         result = self.app.display_output("John")
         self.assertEqual(result, "OK")
 
+    def test_name_happy_edge(self):
+        result = self.app.display_output("O'Toole")
+        self.assertEqual(result, "OK")
+
       
     
 if __name__ == "__main__":
