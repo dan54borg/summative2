@@ -19,6 +19,13 @@ class SmokeTest(unittest.TestCase):
         result = self.app.display_output("O'Toole")
         self.assertEqual(result, "OK")
 
+    @patch('tkinter.messagebox.showerror') 
+    def test_name_fail_presence(self, mock_error):
+        self.app.display_output("")
+        mock_error.assert_called_with("Error", "Name cannot be left blank")
+    
+
+
       
     
 if __name__ == "__main__":
