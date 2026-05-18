@@ -1,57 +1,37 @@
-import tkinter as tk # for creating the GUI
-from tkinter import messagebox # to import the messagebox
-import csv # to write to csv from main
-from datetime import datetime # to record a timestamp
-from quiz_validations import presence_check,length_check,character_check # importing validations
+import tkinter as tk
+from tkinter import messagebox
+from question_data import load_questions, save_response
+from quiz_validations import presence_check, length_check, character_check
+from quiz_ui import build_name_screen, build_question_screen, build_thank_you_screen
 
 BG = "#ED7D31"
-TEXT = "#111111"
 BUTTON_TEXT = "#2d7496"
 
+
 class KnifeSafety(tk.Tk):
+
+    """
+    The class that represents the quiz app
+    """
 
     def __init__(self):
         super().__init__()
         self.title("Knife Safety and PPE")
         self.configure(bg=BG)
-        self.geometry("700x1000")
+        self.geometry("800x450")
         self.name = tk.StringVar()
-    
-        self.name_label = tk.Label(
-            self,
-            text="Please enter your name in the box below",
-            bg=BG,
-            fg=TEXT,
-            font=("Arial", 20)
-        )
-        self.name_label.pack(pady=10)
+        self.questions = load_questions()
+        self.current_question = 0
+        self.student_name = ""
 
-        self.name_entry = tk.Entry(
-            self,
-            textvariable = self.name,
-            font = ("Arial", 20),
-            fg=TEXT
-        )
-        self.name_entry.pack(pady=10)
+        build_name_screen(self)
 
-        self.btn_submit = tk.Button(
-            self,
-            text = "Submit",
-            command=self.btn_press,
-            font = ("Arial", 20),
-            fg=BUTTON_TEXT
-        )
-        self.btn_submit.pack(pady=10)
+    """
+    Builds the name entry screen
+    """
 
-        self.output_box = tk.Label(self,
-                                    text="",
-                                    bg=BG,
-                                    font=('Arial', 20))
-        self.output_box.pack(pady=10)
-        
     def btn_press(self):
         my_name = self.name_entry.get().strip()
-       
         self.display_output(my_name)
 
     def display_output(self, name):
@@ -64,28 +44,42 @@ class KnifeSafety(tk.Tk):
         if not character_check(name):
             self.error_handler("The name should not have any numbers")
             return
-        else: 
-            '''
-            Temporary output to test functionality, need to update with correct displays
-            '''
-            output = f"Hello, {name.title()}" 
-            self.output_box.config(text=output)
-            return("OK")
+
+        self.student_name = name.title()
+        self.current_question = 0
+        build_question_screen(self)
+
+    """
+    Builds the question screen
+    """
+
+    def handle_yes(self):
+        """
+        Move to the next question, or finish if all answered Yes.
+        """
+        self.current_question += 1
+        if self.current_question >= len(self.questions):
+            save_response(self.student_name, stopped_at=None)
+            build_thank_you_screen(self)
+        else:
+            build_question_screen(self)
+
+    def handle_no(self):
+        """
+        Submit immediately when the user answers No.
+        """
+        save_response(self.student_name, stopped_at=self.current_question)
+        build_thank_you_screen(self)
 
     def error_handler(self, error_message):
-        try: 
+        try:
             messagebox.showerror("Error", error_message)
-        except Exception as e: 
+        except Exception as e:
             print(f"Something went wrong: {e}")
-        
-    def presence_check(self, name):
-        return bool(name)
-    
-    def length_check(self, name):
-        return 2<len(name)<=20
-    
-    def character_check(self, name): 
-        return bool(re.fullmatch(r"[a-zA-Z-\s']+", name))
+
+    def clear_screen(self):
+        for widget in self.winfo_children():
+            widget.destroy()
 
 
 if __name__ == "__main__":
