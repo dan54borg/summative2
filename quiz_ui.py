@@ -122,7 +122,7 @@ def build_thank_you_screen(app):
 
     tk.Button(
         app,
-        text="Close",
+        text="Exit",
         font=("Arial", 20),
         fg=BUTTON_TEXT,
         command=app.destroy
