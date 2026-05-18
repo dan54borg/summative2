@@ -2,7 +2,7 @@ import tkinter as tk # for creating the GUI
 from tkinter import messagebox # to import the messagebox
 import csv # to write to csv from main
 from datetime import datetime # to record a timestamp
-import re #importing the regex module to check the name does not contain numbers
+from quiz_validations import presence_check,length_check,character_check # importing validations
 
 BG = "#ED7D31"
 TEXT = "#111111"
@@ -55,15 +55,15 @@ class KnifeSafety(tk.Tk):
         self.display_output(my_name)
 
     def display_output(self, name):
-        if not self.presence_check(name):
+        if not presence_check(name):
             self.error_handler("Name cannot be left blank")
-            return("Presence check failed")
-        elif not self.length_check(name):
+            return
+        if not length_check(name):
             self.error_handler("The name should be between 2 and 19 characters")
-            return("Length check failed")
-        elif not self.character_check(name): # Setting error message for a failed text check
+            return
+        if not character_check(name):
             self.error_handler("The name should not have any numbers")
-            return("Charcter check failed")
+            return
         else: 
             '''
             Temporary output to test functionality, need to update with correct displays
