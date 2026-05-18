@@ -37,17 +37,18 @@ class KnifeSafety(tk.Tk):
     def display_output(self, name):
         if not presence_check(name):
             self.error_handler("Name cannot be left blank")
-            return
+            return "Presence check failed"
         if not length_check(name):
             self.error_handler("The name should be between 2 and 19 characters")
-            return
+            return "Length check failed"
         if not character_check(name):
             self.error_handler("The name should not have any numbers")
-            return
+            return "Character check failed"
 
         self.student_name = name.title()
         self.current_question = 0
         build_question_screen(self)
+        return "OK"
 
     """
     Builds the question screen
