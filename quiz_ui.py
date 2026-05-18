@@ -13,6 +13,14 @@ def build_name_screen(app):
 
     tk.Label(
         app,
+        text="VAS Knife Safety Waiver",
+        bg=BG,
+        fg=TEXT,
+        font=("Arial", 36)
+    ).pack(pady=10)
+
+    tk.Label(
+        app,
         text="Please enter your name in the box below",
         bg=BG,
         fg=TEXT,
