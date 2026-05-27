@@ -3,6 +3,9 @@ from unittest.mock import patch
 from main import KnifeSafety
 
 class SmokeTest(unittest.TestCase):
+    """
+    A set of tests that tests basic functionality and edge cases.
+    """
 
     def setUp(self):
         self.app = KnifeSafety()

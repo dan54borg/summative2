@@ -1,5 +1,13 @@
 import re
 
+"""
+Validations to check against the user submitted name
+
+Presence Check - checks that a name is entered
+Length Check - checks that the name is a suitable length
+Character Check - checks that only valid characters are used in the name.
+"""
+
 def presence_check(name: str) -> bool:
     return bool(name)
 
