@@ -22,7 +22,7 @@ class KnifeSafety(tk.Tk):
         self.name = tk.StringVar()
         self.questions = load_questions()
         self.current_question = 0
-        self.student_name = ""
+        self.employee_name = ""
 
         build_name_screen(self)
 
@@ -45,7 +45,7 @@ class KnifeSafety(tk.Tk):
             self.error_handler("The name should not have any numbers")
             return "Character check failed"
 
-        self.student_name = name.title()
+        self.employee_name = name.title()
         self.current_question = 0
         build_question_screen(self)
         return "OK"
@@ -60,7 +60,7 @@ class KnifeSafety(tk.Tk):
         """
         self.current_question += 1
         if self.current_question >= len(self.questions):
-            save_response(self.student_name, stopped_at=None)
+            save_response(self.employee_name, stopped_at=None)
             build_thank_you_screen(self)
         else:
             build_question_screen(self)
@@ -69,7 +69,7 @@ class KnifeSafety(tk.Tk):
         """
         Submit immediately when the user answers No.
         """
-        save_response(self.student_name, stopped_at=self.current_question)
+        save_response(self.employee_name, stopped_at=self.current_question)
         build_thank_you_screen(self)
 
     def error_handler(self, error_message):
