@@ -1,4 +1,4 @@
-import csv
+import csv # to read and write to csv from main
 
 
 def load_questions(filepath="questions.csv") -> list:

@@ -1,5 +1,5 @@
-import tkinter as tk
-from tkinter import messagebox
+import tkinter as tk # to create the GUI
+from tkinter import messagebox # to create messagebox for error handling
 from question_data import load_questions, save_response
 from quiz_validations import presence_check, length_check, character_check
 from quiz_ui import build_name_screen, build_question_screen, build_thank_you_screen

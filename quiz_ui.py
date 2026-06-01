@@ -1,4 +1,4 @@
-import tkinter as tk
+import tkinter as tk # to create the GUI
 
 BG = "#ED7D31"
 TEXT = "#111111"
