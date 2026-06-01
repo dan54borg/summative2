@@ -393,6 +393,7 @@ Recently we had to go through the above task, which is currently held over a tea
 ### Reflections
 
 Overall I think this project was a success in terms that I was able to complete what I set out to achieve. The quiz app tracks user attendance and ensures compliance of safety regulations. The compliance task was already complete, this would just be used as a test case to prove that this can work. Yes there are areas that can be improved on but fundamentally the quiz app serves the basic purpose required of it. Whether it could fully replace the current process of emailing out a PDF and collecting acknowledgements by reply is uncertain, but with further development it has the potential to do so.
+
 ---
 
 *Built with [Python](https://www.python.org/) and [Tkinter](https://docs.python.org/3/library/tkinter.html)*
